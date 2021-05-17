@@ -1,4 +1,8 @@
 # MERN
 
-Hello form VSCODE
-success
+Using Mongoose as database
+Experess as server
+React for frontend
+Node
+
+# DESCRIPTION
