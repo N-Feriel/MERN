@@ -17,6 +17,7 @@ function UserList() {
 
       if (responseBody.status === 200) {
         setUserList(responseBody.data);
+        console.log(responseBody);
       } else {
         throw responseBody.message;
       }
