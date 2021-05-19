@@ -1,7 +1,7 @@
 const express = require("express");
 const users = require("./routes/api/users");
 const path = require("path");
-
+require("dotenv").config();
 const app = express();
 
 // BodyPaser MiddleWare
