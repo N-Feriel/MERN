@@ -39,6 +39,15 @@ function UserList() {
           ))}
         </ul>
       )}
+
+      <h1>Users list 2</h1>
+      {usersList && (
+        <ul>
+          {usersList.map((user) => (
+            <li key={user._id}>{user.email}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
