@@ -30,8 +30,8 @@ function UserList() {
   }, []);
 
   return (
-    <div>
-      <h1>Users list</h1>
+    <div className="flex md:flex-col">
+      <h1 className="text-red-300">Users list</h1>
       {usersList && (
         <ul>
           {usersList.map((user) => (
