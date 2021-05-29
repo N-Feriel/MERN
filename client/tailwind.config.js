@@ -7,8 +7,19 @@ module.exports = {
     "public/**/*.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        pink_mod: {
+          light: "#FBEBEB",
+          DEFAULT: "#AC8787",
+        },
+        amazon_blue: {
+          light: "#232F3E",
+          DEFAULT: "#131921",
+        },
+      },
+    },
   },
   variants: {},
-  plugins: [],
+  plugins: [require("@tailwindcss/custom-forms")],
 };

@@ -1,19 +1,43 @@
-import UserList from "./components/UserList";
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import NavBar from "./components/navBar/NavBar";
+import Home from "./pages/Home";
+import AdminPage from "./pages/adminPage/AdminPage";
+import UserPage from "./pages/userPage/UserPage";
+import Footer from "./components/footer/Footer";
+import RegisterPage from "./pages/registerPage/RegisterPage";
+import EventPage from "./pages/eventPage/EventPage";
 
 function App() {
   return (
-    <div className="max-w-md mx-auto flex p-6 bg-gray-100 mt-10 rounded-lg shadow-xl">
-      <div className="ml-6 pt-1">
-        <h1 className="text-2xl text-blue-700 leading-tight">
-          Tailwind and Create React App
-        </h1>
-        <p className="text-base text-gray-700 leading-normal">
-          Building apps together
-        </p>
-      </div>
+    <BrowserRouter>
+      <div className="h-screen bg-gradient-to-t from-gray-400 to-indigo-200">
+        <NavBar />
 
-      <UserList />
-    </div>
+        <main className="mx-auto max-w-screen-2xl">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/admin">
+              <AdminPage />
+            </Route>
+            <Route path="/user">
+              <UserPage />
+            </Route>
+
+            {/* <Route path="/register">
+              <RegisterPage isClient />
+            </Route> */}
+
+            <Route path="/register/event">
+              <EventPage />
+            </Route>
+          </Switch>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
