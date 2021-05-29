@@ -165,12 +165,6 @@ function RegisterFormVolenteer() {
               </div>
 
               <FormikControl
-                control="date"
-                label="Start Date"
-                name="startDate"
-              />
-
-              <FormikControl
                 control="select"
                 label="Source"
                 name="origin"

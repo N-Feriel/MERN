@@ -5,8 +5,6 @@ import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
 import AdminPage from "./pages/adminPage/AdminPage";
 import UserPage from "./pages/userPage/UserPage";
-import RegisterPage from "./pages/registerPage/RegisterPage";
-import EventPage from "./pages/eventPage/EventPage";
 
 function App() {
   return (
@@ -24,14 +22,6 @@ function App() {
             </Route>
             <Route path="/user">
               <UserPage />
-            </Route>
-
-            <Route path="/register">
-              <RegisterPage isClient />
-            </Route>
-
-            <Route path="/register/event">
-              <EventPage />
             </Route>
           </Switch>
         </main>

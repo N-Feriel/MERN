@@ -82,12 +82,6 @@ function EventPage() {
                 />
               </div>
 
-              <FormikControl
-                control="date"
-                label="Event Date"
-                name="eventDate"
-              />
-
               <div className="flex items-center justify-center gap-4 pt-5 pb-5 md:gap-8">
                 <button
                   className="w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700"

@@ -13,7 +13,7 @@ function AdminPage() {
           Stats List
         </h2>
 
-        {/* <Stats /> */}
+        <Stats />
 
         <Register />
       </div>
