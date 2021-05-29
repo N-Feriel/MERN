@@ -5,7 +5,6 @@ import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
 import AdminPage from "./pages/adminPage/AdminPage";
 import UserPage from "./pages/userPage/UserPage";
-import Footer from "./components/footer/Footer";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 import EventPage from "./pages/eventPage/EventPage";
 
@@ -27,9 +26,9 @@ function App() {
               <UserPage />
             </Route>
 
-            {/* <Route path="/register">
+            <Route path="/register">
               <RegisterPage isClient />
-            </Route> */}
+            </Route>
 
             <Route path="/register/event">
               <EventPage />
