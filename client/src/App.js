@@ -5,6 +5,7 @@ import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
 import AdminPage from "./pages/adminPage/AdminPage";
 import UserPage from "./pages/userPage/UserPage";
+import RegisterFormClient from "./pages/registerPage/components/RegisterFormClient";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             </Route>
             <Route path="/user">
               <UserPage />
+            </Route>
+
+            <Route path="/register">
+              <RegisterFormClient />
             </Route>
           </Switch>
         </main>
