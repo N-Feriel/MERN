@@ -2,11 +2,19 @@ const express = require("express");
 const users = require("./routes/api/users");
 const path = require("path");
 require("dotenv").config();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
 const app = express();
+app.use(cors());
 
 // BodyPaser MiddleWare
 // parse various different custom JSON types as JSON
 app.use(express.json());
+
+//middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //connect to mongiise
 const connectDB = require("./config/db");

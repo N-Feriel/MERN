@@ -20,7 +20,7 @@
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
-  "proxy": "https://time-manage-data.herokuapp.com",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "build:tailwind": "tailwind build src/tailwind.css -o src/tailwind.output.css",
     "watch:tailwind": "chokidar 'src/**/*.css' 'src/**/*.scss' --ignore src/tailwind.output.css -c 'npm run build:tailwind'",
