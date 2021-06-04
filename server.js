@@ -1,5 +1,4 @@
 const express = require("express");
-const users = require("./routes/api/users");
 const path = require("path");
 require("dotenv").config();
 const bodyParser = require("body-parser");
@@ -20,10 +19,23 @@ app.use(bodyParser.json());
 const connectDB = require("./config/db");
 const { resolve } = require("path");
 
+const users = require("./routes/api/users");
+const register = require("./routes/api/register");
+const event = require("./routes/api/events");
+const auth = require("./routes/api/auth");
+const notification = require("./routes/api/notification");
+const error = require("./middleware/error");
+
 connectDB();
 
 //Use route
 app.use("/api/users", users);
+app.use("/api/register", register);
+app.use("/api/event", event);
+app.use("/api/auth", auth);
+app.use("/api/notification", notification);
+
+app.use(error);
 
 //Serve static assets if in production
 if (process.env.NODE_ENV === "production") {

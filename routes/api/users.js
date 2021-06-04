@@ -1,58 +1,66 @@
 const express = require("express");
 const router = express.Router();
+const {
+  getUsersVolenteer,
+  getUserVolenteer,
+  deleteUserVolenteer,
+  updateUserVolenteer,
+  getUsersClients,
+  getUserClient,
+  updateUserClient,
+  deleteUserClient,
+  getUsersClientsAssignTo,
+  getClientAssignTo,
+} = require("../handlers/handleUsers");
 
-//User Model
-const User = require("../../models/User");
-
-//@route GET api/users
-//@desc Get All users
+//@route GET api/users/volenteers
+//@desc Get All volenteers users
 //@access Private
-router.get("/", (req, res) => {
-  User.find()
-    .sort({ date: -1 })
-    .then((users) =>
-      res.status(200).json({
-        status: 200,
-        data: users,
-      })
-    );
-});
+router.get("/volenteers", getUsersVolenteer);
 
-//@route POST api/users
-//@desc Create a user
+//@route GET api/users/volenteers/id
+//@desc Get All volenteers users
 //@access Private
-router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+router.get("/volenteers/:userId", getUserVolenteer);
 
-  const newUser = new User({
-    email: email,
-    password: password,
-  });
-  await newUser.save();
-
-  return res.json({
-    status: 201,
-    data: newUser,
-  });
-});
-
-//@route DELETE api/users/:id
-//@desc delete a user
+//@route PATCH api/users/volenteers/user
+//@desc update a user volenteer
 //@access Private
-router.delete("/:id", async (req, res) => {
-  const _id = req.params.id;
-  let userToRemove = await User.findByIdAndRemove(_id);
+router.patch("/volenteers/user", updateUserVolenteer);
 
-  if (!userToRemove) {
-    return res.status(404).json({
-      message: "User with given Id is not found",
-    });
-  }
+//@route DELETE api/users/volenteers/:userId
+//@desc delete a volenteer user
+//@access Private
+router.delete("/volenteers/:userId", deleteUserVolenteer);
 
-  return res.status(200).json({
-    status: 200,
-    success: true,
-  });
-});
+//@route GET api/users/clients
+//@desc Get All clients users
+//@access Private
+router.get("/clients", getUsersClients);
+
+//@route GET api/users/clients
+//@desc Get clients list assign to specific Volenteer
+//@access Private
+router.get("/clientList", getUsersClientsAssignTo);
+
+//@route GET api/users/clients
+//@desc Get clients list assign to specific Volenteer
+//@access Private
+router.get("/clientList/userId", getClientAssignTo);
+
+//@route GET api/users/clients/id
+//@desc Get specific user with given id
+//@access Private
+router.get("/clients/:userId", getUserClient);
+
+//@route PATCH api/users/clients/user
+//@desc update a user
+//@access Private
+router.patch("/clients/user", updateUserClient);
+
+//@route DELETE api/users/clients/:userId
+//@desc delete a client user
+//@access Private
+router.delete("/clients/:userId", deleteUserClient);
 
 module.exports = router;
