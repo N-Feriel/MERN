@@ -5,7 +5,9 @@ import NavBar from "./components/navBar/NavBar";
 import Home from "./pages/Home";
 import AdminPage from "./pages/adminPage/AdminPage";
 import UserPage from "./pages/userPage/UserPage";
+import LoginPage from "./pages/loginPage/LoginPage";
 import RegisterFormClient from "./pages/registerPage/components/RegisterFormClient";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
@@ -18,11 +20,22 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/admin">
+            {/* <Route path="/admin">
               <AdminPage />
-            </Route>
+            </Route> */}
+            <ProtectedRoute
+              exact
+              path="/admin"
+              authed={true}
+              component={AdminPage}
+            />
+
             <Route path="/user">
               <UserPage />
+            </Route>
+
+            <Route path="/login">
+              <LoginPage />
             </Route>
 
             <Route path="/register">
