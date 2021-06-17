@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 function DatePicker(props) {
   const { label, name, ...rest } = props;
   return (
-    <div className="grid grid-cols-1 mt-5 mx-7">
+    <div className="grid grid-cols-1 mt-5 mx-7 ">
       <label
         className="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light"
         htmlFor={name}
@@ -21,7 +21,7 @@ function DatePicker(props) {
           const { value } = field;
           return (
             <DateView
-              className="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              className="px-3 py-3 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               id={name}
               {...field}
               {...rest}

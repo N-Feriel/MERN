@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Notification } = require("../../models/notification");
 
-const { UserVolenteer } = require("../../models/User");
+const { VolenUser } = require("../../models/User");
 
 //Create a notification
 const createNotification = async (req, res) => {
@@ -12,9 +12,7 @@ const createNotification = async (req, res) => {
   }
 
   try {
-    const user = await UserVolenteer.findById(req.body.userId).select(
-      "-password"
-    );
+    const user = await VolenUser.findById(req.body.userId).select("-password");
 
     if (!user) {
       throw Error("User don't exist");

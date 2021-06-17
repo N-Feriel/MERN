@@ -6,37 +6,54 @@ import {
 } from "@heroicons/react/outline";
 import React from "react";
 
-function SideBar() {
+function SideBar({ valueList, setValueList }) {
   return (
-    <div className="flex h-full text-blue-900 bg-white lg:font-bold lg:text-ms lg:flex-col lg:rounded-lg lg:m-auto">
-      <div className="items-center m-4 lg:flex">
-        <div className="flex items-center justify-center w-20 h-20 m-auto text-center bg-blue-900 rounded-full p-auto text-gray-50">
-          <span>Admin</span>
-        </div>
-
-        <div>
-          <p>Name</p>
-        </div>
+    <div className="flex justify-around mt-5 mr-5 bg-blue-900 rounded-2xl text-gray-50 lg:flex-col">
+      <div
+        className={`flex space-x-2 my-auto px-8 py-3 cursor-pointer ${
+          valueList === "register"
+            ? "bg-purple-200 justify-center text-purple-900 "
+            : ""
+        }`}
+        onClick={() => setValueList("register")}
+      >
+        <DocumentAddIcon className="h-6" />
+        <h4 className="hidden text-lg uppercase lg:block">Add new</h4>
       </div>
 
-      <div className="flex justify-around flex-1 m-4 space-y-2 lg:flex-col">
-        <div className="flex items-center space-x-2">
-          <DocumentAddIcon className="h-8" />
-          <h2 className="hidden lg:inline-block">Add New</h2>
-        </div>
+      <div
+        className={`flex space-x-2 my-auto px-8 py-3 cursor-pointer ${
+          valueList === "default"
+            ? "bg-purple-200 justify-center text-purple-900 "
+            : ""
+        }`}
+        onClick={() => setValueList("default")}
+      >
+        <DocumentReportIcon className="h-6" />
+        <h4 className="hidden text-lg uppercase lg:block">stats</h4>
+      </div>
+      <div
+        className={`flex space-x-2 my-auto px-8 py-3 cursor-pointer ${
+          valueList === "volenteer"
+            ? "bg-purple-200 justify-center text-purple-900 "
+            : ""
+        }`}
+        onClick={() => setValueList("volenteer")}
+      >
+        <UserGroupIcon className="h-6" />
+        <h4 className="hidden text-lg uppercase lg:block">volenteers List</h4>
+      </div>
 
-        <div className="flex items-center space-x-2">
-          <DocumentReportIcon className="h-8" />
-          <h2 className="hidden lg:inline-block">Stats</h2>
-        </div>
-        <div className="flex items-center space-x-2">
-          <UserGroupIcon className="h-8" />
-          <h2 className="hidden lg:inline-block">Volenteers List</h2>
-        </div>
-        <div className="flex items-center space-x-2">
-          <UsersIcon className="h-8" />
-          <h2 className="hidden lg:inline-block">Clients List</h2>
-        </div>
+      <div
+        className={`flex space-x-2 my-auto px-8 py-3 cursor-pointer ${
+          valueList === "client"
+            ? "bg-purple-200 justify-center text-purple-900 "
+            : ""
+        }`}
+        onClick={() => setValueList("client")}
+      >
+        <UsersIcon className="h-6" />
+        <h4 className="hidden text-lg uppercase lg:block">Clients List</h4>
       </div>
     </div>
   );

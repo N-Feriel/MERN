@@ -4,12 +4,21 @@ import "./tailwind.output.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./components/UserContext";
+import { AssignProvider } from "./components/AssignContext";
+import { Provider } from "react-redux";
+import configureStore from "./store/index";
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <App />
-    </UserProvider>
+    <Provider store={store}>
+      <UserProvider>
+        <AssignProvider>
+          <App />
+        </AssignProvider>
+      </UserProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

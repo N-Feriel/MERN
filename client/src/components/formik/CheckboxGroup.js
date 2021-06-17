@@ -16,6 +16,7 @@ function CheckboxGroup(props) {
       >
         <strong>{label}</strong>
       </label>
+      <ErrorMessage component={TextError} name={name} />
       <Field name={name}>
         {({ field }) => {
           return options.map((option) => {
@@ -41,7 +42,6 @@ function CheckboxGroup(props) {
           });
         }}
       </Field>
-      <ErrorMessage component={TextError} name={name} />
     </div>
   );
 }

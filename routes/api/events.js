@@ -51,7 +51,7 @@ router.get("/totalTime/:userId", getTotalEventUser);
 //@route totalTime api/events/
 //@desc get total time per EventType per Volenteer
 //@access Private
-router.get("/totalTime/:type", getTotalEventType);
+router.get("/events/:type", getTotalEventType);
 
 //@route totalTime api/events/:typeId/:userId
 //@desc get total time per EventType per Volenteer

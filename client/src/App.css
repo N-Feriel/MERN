@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.paginationBttns a {
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(19, 27, 99, 0.6);
+  color: rgba(235, 225, 225, 0.8);
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  background-color: rgba(19, 27, 99, 0.6);
+}
+
+.paginationActive a {
+  background-color: rgba(19, 27, 99, 0.6);
+}
+
+.paginationDisabled a {
+  color: rgba(5, 19, 83, 0.87);
+  background-color: rgba(19, 27, 99, 0.6);
+}

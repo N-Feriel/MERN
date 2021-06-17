@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import * as Yup from "yup";
+import { useHistory } from "react-router";
 import { Formik, Form } from "formik";
 import FormikControl from "../../components/formik/FormikControl";
+import { UserContext } from "../../components/UserContext";
+import ModalComp from "../../components/ModelCom";
+import TextError from "../../components/formik/TextError";
 
 function EventPage() {
+  const url = `/api/event`;
+  const [errors, setErrors] = useState("");
+  const history = useHistory();
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [messageAl, setMessageAl] = useState("");
+
+  const { user } = useContext(UserContext);
   const eventTypes = [
     { key: "Select event Type", value: "" },
     { value: "meeting", key: "Meeting" },
@@ -19,7 +31,7 @@ function EventPage() {
       numberOfParticipants: 1,
       participantsName: [],
     },
-    time: Number,
+    time: 1,
     eventDate: null,
     type: "",
     typeOneToOne: "DEFAULT",
@@ -38,12 +50,58 @@ function EventPage() {
     type: Yup.string().required("Required"),
   });
 
+  const jwt = localStorage.getItem("token");
+
   const onSubmit = async (values) => {
-    console.log(values);
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-auth-token": `${jwt}`,
+        },
+      });
+
+      const responseBody = await response.json();
+
+      if (responseBody.status === 201) {
+        setMessageAl(`Success - The event was submited `);
+        setIsOpen(true);
+      } else {
+        // console.log("resonpse", responseBody);
+        throw responseBody.message;
+      }
+    } catch (error) {
+      setErrors(error);
+      console.log(errors, "erros");
+    }
   };
+
+  function closeModal() {
+    setIsOpen(false);
+    history.push("/user/me");
+  }
 
   return (
     <div>
+      <ModalComp
+        setIsOpen={setIsOpen}
+        closeModal={closeModal}
+        modalIsOpen={modalIsOpen}
+      >
+        <h4 className="mb-4 text-center lg:text-xl">{messageAl}</h4>
+        <div className="flex mx-auto mt-5">
+          <button
+            className="px-4 py-2 ml-auto mr-4 text-sm text-white uppercase bg-purple-500 rounded-lg w-min "
+            onClick={() => setIsOpen(false)}
+          >
+            Ok
+          </button>
+        </div>
+      </ModalComp>
+      {errors && <TextError>{errors}</TextError>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -65,6 +123,12 @@ function EventPage() {
                   label="Communication Type"
                   name="type"
                   options={eventTypes}
+                />
+
+                <FormikControl
+                  control="date"
+                  label="Event Date"
+                  name="eventDate"
                 />
 
                 <FormikControl

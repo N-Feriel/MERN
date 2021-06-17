@@ -1,5 +1,4 @@
 require("dotenv").config();
-const { isRef } = require("joi");
 const _ = require("lodash");
 const { VolenUser, ClientUser } = require("../../models/User");
 
@@ -237,6 +236,110 @@ const getClientAssignTo = async (req, res) => {
   }
 };
 
+//get list of volenteers to assign them to new client
+const getAssignListVolenteers = async (req, res) => {
+  try {
+    const assignList = await VolenUser.aggregate([
+      {
+        $match: { isActif: { $all: [true] } },
+      },
+      {
+        $group: {
+          _id: null,
+          users: {
+            $push: {
+              _id: "$_id",
+              key: "$_id",
+              value: { $concat: ["$first_name", " ", "$last_name"] },
+            },
+          },
+        },
+      },
+    ]);
+    if (!assignList) {
+      throw Error("Can't find users in database");
+    }
+    res.status(200).json({
+      status: 200,
+      data: assignList,
+    });
+  } catch (e) {
+    res.status(400).json({
+      status: 400,
+      message: e.message,
+    });
+  }
+};
+
+const getTotalUser = async (req, res) => {
+  const { userType } = req.params;
+  let totalUser = [];
+
+  try {
+    if (userType == "volenteer") {
+      totalUser = await VolenUser.aggregate([
+        {
+          $group: {
+            _id: "$isActif",
+            // total: { $sum: "$time" },
+            count: { $sum: 1 },
+          },
+        },
+      ]);
+    } else if (userType == "client") {
+      totalUser = await ClientUser.aggregate([
+        {
+          $group: {
+            _id: "$isActif",
+            // total: { $sum: "$time" },
+            count: { $sum: 1 },
+          },
+        },
+      ]);
+    }
+
+    if (!totalUser) throw Error("Can't find users in database");
+
+    res.status(200).json({
+      status: 200,
+      data: totalUser,
+    });
+  } catch (e) {
+    res.status(400).json({
+      status: 400,
+      message: e.message,
+    });
+  }
+};
+
+const getCLientsStatus = async (req, res) => {
+  const { statusType } = req.params;
+
+  let ClientUsers;
+
+  try {
+    if (statusType == "active") {
+      ClientUsers = await ClientUser.find({ isActif: true });
+    } else if (statusType == "archive") {
+      ClientUsers = await ClientUser.find({ isActif: false });
+    } else if (statusType == "toAssign") {
+      ClientUsers = await ClientUser.find({ "assignTo.assignGM": "" });
+    }
+    if (!ClientUsers) {
+      throw "The selected status is not defined!";
+    }
+    res.status(200).json({
+      status: 200,
+      data: ClientUsers,
+    });
+  } catch (e) {
+    res.status(400).json({
+      status: 400,
+      message: e.message,
+    });
+  }
+};
+
 module.exports = {
   getUsersVolenteer,
   getUserVolenteer,
@@ -248,4 +351,7 @@ module.exports = {
   deleteUserClient,
   getUsersClientsAssignTo,
   getClientAssignTo,
+  getAssignListVolenteers,
+  getTotalUser,
+  getCLientsStatus,
 };

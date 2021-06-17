@@ -13,13 +13,14 @@ function Input(props) {
       }`}
     >
       <label
-        className="text-xs font-semibold text-gray-500 uppercase md:text-sm text-light"
+        className={`text-xs font-semibold text-gray-500 uppercase md:text-sm text-light
+        ${isCheckBox ? "order-last ml-2 pt-1" : ""}`}
         htmlFor={name}
       >
         {label}
       </label>
       <Field
-        className="px-3 py-2 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        className="px-3 py-3 mt-1 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         id={name}
         name={name}
         {...rest}

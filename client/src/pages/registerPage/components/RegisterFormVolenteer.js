@@ -1,8 +1,10 @@
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router";
 import * as Yup from "yup";
 import FormikControl from "../../../components/formik/FormikControl";
 import HeaderForm from "./HeaderForm";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
 function RegisterFormVolenteer() {
   const sources = [
@@ -31,7 +33,7 @@ function RegisterFormVolenteer() {
     first_name: "",
     last_name: "",
     password: "123456",
-    phone: Number,
+    phone: "",
     address: {
       city: "",
       zipCode: "",
@@ -60,17 +62,51 @@ function RegisterFormVolenteer() {
       .matches(phoneRegExp, "Phone number format 123-456-7890")
       .required("Required"),
   });
+  const [errors, setErrors] = useState("");
 
-  const onSubmit = (values) => {
-    console.log("values submited", values);
+  const url = "/api/register/volenteer";
+  const jwt = localStorage.getItem("token");
+
+  const history = useHistory();
+
+  const onSubmit = async (values) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-auth-token": `${jwt}`,
+        },
+      });
+
+      const responseBody = await response.json();
+
+      if (responseBody.status === 201) {
+        console.log(responseBody, "response 201");
+        history.push("/admin");
+      } else {
+        throw responseBody.message;
+      }
+    } catch (error) {
+      setErrors(error);
+      console.log("error", error);
+    }
   };
   return (
-    <div className="flex flex-col items-center justify-center mt-32 bg-gray-200">
+    <div className="flex flex-col items-center justify-center bg-gray-200">
       <div className="m-3">
         <HeaderForm />
       </div>
 
       <h2 className="font-bold uppercase mb-9">Volenteer form</h2>
+      {errors && (
+        <div className="flex text-red-500 lg:text-lg">
+          <ExclamationCircleIcon className="h-6 mx-2" />
+          {errors}
+        </div>
+      )}
 
       <Formik
         initialValues={initialValues}
@@ -163,6 +199,11 @@ function RegisterFormVolenteer() {
                   isCheckBox
                 />
               </div>
+              <FormikControl
+                control="date"
+                label="Start Date"
+                name="startDate"
+              />
 
               <FormikControl
                 control="select"

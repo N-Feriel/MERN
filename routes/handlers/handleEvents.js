@@ -269,6 +269,10 @@ const getTotalTimeOneToOne = async (req, res) => {
     if (!totalTime) {
       throw Error("can not calculate the total time");
     }
+    res.status(200).json({
+      status: 200,
+      data: totalTime,
+    });
   } catch (e) {
     res.status(400).json({
       status: 400,
@@ -292,6 +296,10 @@ const getTotalOneToOne = async (req, res) => {
     if (!totalTime) {
       throw Error("can not calculate the total time");
     }
+    res.status(200).json({
+      status: 200,
+      data: totalTime,
+    });
   } catch (e) {
     res.status(400).json({
       status: 400,
