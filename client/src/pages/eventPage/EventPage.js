@@ -81,7 +81,7 @@ function EventPage() {
 
   function closeModal() {
     setIsOpen(false);
-    history.push("/user/me");
+    history.push("/home");
   }
 
   return (

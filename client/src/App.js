@@ -15,7 +15,7 @@ import ClientPage from "./pages/clientPage/ClientPage";
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-t from-gray-200 to-indigo-200">
+      <div className="bg-gradient-to-b from-pink-200 to-purple-200 ">
         <NavBar />
 
         <main className="mx-auto max-w-screen-2xl">
@@ -68,9 +68,7 @@ function App() {
               component={EventPage}
             />
 
-            <Route path="/user">
-              <UserPage />
-            </Route>
+            <ProtectedRoute exact path="/user" component={UserPage} />
 
             <Route path="/login">
               <LoginPage />

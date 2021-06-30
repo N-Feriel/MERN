@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+
+const auth = require("../../middleware/auth");
 const {
   getUsersVolenteer,
   getUserVolenteer,
@@ -54,7 +56,7 @@ router.get("/stat/:userType", getTotalUser);
 //@route GET api/users/clients
 //@desc Get clients list assign to specific Volenteer
 //@access Private
-router.get("/clientList", getUsersClientsAssignTo);
+router.get("/clientList", auth, getUsersClientsAssignTo);
 
 //@route GET api/users/clients
 //@desc Get clients list assign to specific Volenteer

@@ -15,8 +15,6 @@ function RegisterFormClient() {
 
   const { listVolenteers } = useContext(AssignContext);
 
-  console.log(listVolenteers);
-
   const history = useHistory();
 
   const sources = [

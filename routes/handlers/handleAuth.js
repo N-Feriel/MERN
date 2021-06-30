@@ -59,6 +59,7 @@ const authUser = async (req, res) => {
 const changeUserPassword = async (req, res) => {
   try {
     const email = req.user.email;
+    console.log(req);
 
     let user = await VolenUser.findOne({ email: email });
 

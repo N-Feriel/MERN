@@ -1,3 +1,4 @@
+import { XIcon } from "@heroicons/react/outline";
 import { Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
 
@@ -60,7 +61,8 @@ function OneToOneEvent({ userClient, timeSubmitedCallback }) {
   };
 
   return (
-    <div className="flex">
+    <div className="relative flex w-full">
+      <XIcon className="absolute h-6 right-2" />
       {errors && <div>{errors}</div>}
       <Formik
         initialValues={initialValues}
@@ -69,12 +71,13 @@ function OneToOneEvent({ userClient, timeSubmitedCallback }) {
       >
         {(formik) => {
           return (
-            <Form>
+            <Form className="grid w-full md:grid-flow-col">
               <FormikControl
                 control="select"
                 label="Communication Type"
                 name="typeOneToOne"
                 options={communicationTypes}
+                className="col-span-2"
               />
               <FormikControl
                 control="input"
@@ -83,7 +86,7 @@ function OneToOneEvent({ userClient, timeSubmitedCallback }) {
                 name="time"
               />
 
-              <div className="flex items-center justify-center gap-4 pt-5 pb-5 mt-3 md:gap-8">
+              <div className="flex items-end justify-center gap-4 pt-5 pb-5 mt-3 md:gap-8 md:mb-auto">
                 <button
                   className="w-auto px-4 py-2 font-medium text-white bg-purple-500 rounded-lg shadow-xl hover:bg-purple-700"
                   type="submit"

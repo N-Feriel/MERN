@@ -186,6 +186,7 @@ const deleteUserClient = async (req, res) => {
 //Function to get list of clients to specific volenteer
 const getUsersClientsAssignTo = async (req, res) => {
   const _idVolenteer = req.user._id;
+  console.log(_idVolenteer, "lod");
 
   try {
     const clientsList = await ClientUser.find({

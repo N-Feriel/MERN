@@ -3,7 +3,6 @@ import { useParams, useHistory, useLocation } from "react-router";
 import { UserContext } from "../../components/UserContext";
 import ModalComp from "../../components/ModelCom";
 import OneToOneEvent from "../eventPage/components/OneToOneEvent";
-import TextError from "../../components/formik/TextError";
 import UpdatePage from "../updatePage/UpdatePage";
 
 import {
@@ -184,7 +183,7 @@ function ClientPage() {
     console.log(hasAccess, clientData);
 
     return (
-      <main className="flex flex-col px-4 ">
+      <main className="flex flex-col px-4">
         <ModalComp modalIsOpen={isOpenModalDelete}>
           <h4 className="mb-4 text-center lg:text-xl">{messageNotification}</h4>
           <div className="flex mx-auto mt-5">

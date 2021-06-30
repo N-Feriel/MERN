@@ -30,7 +30,7 @@ function Home() {
             Admin
           </button>
           <button
-            onClick={() => history.push("/login")}
+            onClick={() => history.push("/user")}
             className="px-3 py-1 text-white bg-green-600 rounded-md "
           >
             User

@@ -1,7 +1,7 @@
 import { produce } from "immer";
 
 const initialState = {
-  userData: null,
+  userClientsData: null,
   status: "idle",
   error: null,
 };
@@ -18,7 +18,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         status: "idle",
-        userData: [...action.data],
+        userClientsData: [...action.data],
       };
     }
 

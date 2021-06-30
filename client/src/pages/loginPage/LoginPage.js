@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import { Redirect, useHistory, useLocation } from "react-router";
 import * as Yup from "yup";
-import TextError from "../../components/formik/TextError";
 import FormikControl from "../../components/formik/FormikControl";
 import { getCurrentUser, login } from "../../services/authService";
 
@@ -10,7 +9,6 @@ function LoginPage() {
   const initialValues = { email: "", password: "" };
 
   const [error, setError] = useState("");
-  const [userStatus, setUserStatus] = useState("loading");
 
   const history = useHistory();
   const { state } = useLocation();
@@ -21,8 +19,6 @@ function LoginPage() {
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
-
     try {
       const response = await login(values);
 
@@ -32,12 +28,10 @@ function LoginPage() {
         localStorage.setItem("token", responseBody.data);
         history.push(state.redirectTo);
       } else {
-        throw responseBody;
+        throw responseBody.message;
       }
     } catch (error) {
-      if (error.status === 400) {
-        console.log(error, "error");
-      }
+      setError(error);
     }
   };
 
@@ -45,7 +39,7 @@ function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center h-full mx-auto mt-32 bg-gray-200 lg:w-3/4 ">
-      {error && <TextError>{error}</TextError>}
+      {error && <div className="text-red-500">{error}</div>}
 
       <Formik
         initialValues={initialValues}
