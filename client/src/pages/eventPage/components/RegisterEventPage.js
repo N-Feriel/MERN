@@ -1,9 +1,9 @@
 import React from "react";
-import EventPage from "../EventPage";
+import Event from "./Event";
 import OneToOneEvent from "./OneToOneEvent";
 
 function RegisterEventPage({ isOneToOneEvent }) {
-  return <div>{isOneToOneEvent ? <OneToOneEvent /> : <EventPage />}</div>;
+  return <div>{isOneToOneEvent ? <OneToOneEvent /> : <Event />}</div>;
 }
 
 export default RegisterEventPage;

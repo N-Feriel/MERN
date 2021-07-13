@@ -3,7 +3,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import momGroup from "../assets/momsgroup.jpg";
 import peau from "../assets/peau-bebe.jpg";
-import bebe from "../assets/peauapeau.webp";
 
 function Banner() {
   return (

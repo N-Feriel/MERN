@@ -17,6 +17,7 @@ import {
   BellIcon,
   ClockIcon,
   UsersIcon,
+  LogoutIcon,
 } from "@heroicons/react/outline";
 
 import userImg from "../../assets/user_icon.svg";
@@ -27,6 +28,7 @@ import Settings from "./components/Settings";
 import ModalComp from "../../components/ModelCom";
 import Banner from "../../components/Banner";
 import Notification from "./components/Notification";
+import ClientsList from "./components/ClientsList";
 
 function UserPage() {
   const url = `/api/users/clientList`;
@@ -42,12 +44,9 @@ function UserPage() {
 
   const [userList, setUserList] = useState("client");
 
-  const [isDetails, setIsDetails] = useState(false);
   const [userEvents, setUserEvents] = useState([]);
   const [userNotifications, setUserNotifications] = useState([]);
   const [totalNew, setTotalNew] = useState(0);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const [modalIsOpen, setIsOpenModal] = useState(false);
   const [messageUpdate, setMessageUpdate] = useState(null);
@@ -124,35 +123,34 @@ function UserPage() {
     }
   };
 
-  const getUsertime = async () => {
-    try {
-      const url = `/api/event/totalTime/${user._id}`;
+  // const getUsertime = async () => {
+  //   try {
+  //     const url = `/api/event/totalTime/${user._id}`;
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Accept-Charset": "utf-8",
-          "x-auth-token": `${jwt}`,
-        },
-      });
+  //     const response = await fetch(url, {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Accept-Charset": "utf-8",
+  //         "x-auth-token": `${jwt}`,
+  //       },
+  //     });
 
-      const responseBody = await response.json();
+  //     const responseBody = await response.json();
 
-      if (response.status === 200) {
-        setUserEvents(responseBody.data);
-      } else {
-        throw responseBody.message;
-      }
-    } catch (error) {
-      setErrors(error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       setUserEvents(responseBody.data);
+  //     } else {
+  //       throw responseBody.message;
+  //     }
+  //   } catch (error) {
+  //     setErrors(error);
+  //   }
+  // };
 
-  const handleUserInfo = () => {
-    setIsDetails(!isDetails);
-    setIsOpen(false);
-    getUsertime();
+  const handleLogOut = () => {
+    logout();
+    history.push("/");
   };
 
   const project = () => {
@@ -186,6 +184,8 @@ function UserPage() {
             setIsOpenModal1={setIsOpenModal1}
           />
         );
+      case "allClients":
+        return <ClientsList />;
 
       default:
         return <h1>No component match</h1>;
@@ -198,13 +198,11 @@ function UserPage() {
     displayNotifications();
   }, []);
 
-  console.log(userNotifications, "notif");
-
   if (status === "error") return <div>Error...</div>;
   else if (status === "loading") return <div>...Loading</div>;
   else if (status === "idle") {
     return (
-      <main className="p-6">
+      <main className="p-6 ">
         <ModalComp modalIsOpen={modalIsOpen1}>
           <>
             <h4 className="mb-4 text-center lg:text-xl">{messageUpdate}</h4>
@@ -216,6 +214,7 @@ function UserPage() {
             </button>
           </>
         </ModalComp>
+
         <div className="flex justify-between align-center">
           <div className="self-end">
             <p className="text-gray-400">Hello,</p>
@@ -225,8 +224,19 @@ function UserPage() {
               </h2>
             )}
           </div>
-          <div className="pt-4 bg-red-100 rounded-lg ">
-            <img alt="profile" src={userImg} className="h-16 lg:h-24" />
+          <div>
+            <div className="mr-0" onClick={handleLogOut}>
+              <button className="flex px-4 py-1 mx-auto my-2 text-xs bg-gray-300 rounded-lg cursor-pointer hover:bg-pink-600">
+                <LogoutIcon className="h-4 mx-1" /> logout
+              </button>
+            </div>
+            <div className="pt-4 bg-red-100 rounded-lg ">
+              <img
+                alt="profile"
+                src={userImg}
+                className="h-16 m-auto lg:h-24"
+              />
+            </div>
           </div>
         </div>
 

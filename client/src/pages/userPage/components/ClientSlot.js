@@ -15,7 +15,7 @@ function ClientSlot({
 
   const handleClientDetails = (userId) => {
     const location = {
-      pathname: `/client/${userId}`,
+      pathname: `/clientDetails/${userId}`,
       state: {
         redirectTo: pathname,
       },
@@ -57,19 +57,12 @@ function ClientSlot({
         </div>
       </div>
       <div className="m-auto">
-        {
-          isOpen && (
-            // (isTimeSubmited ? (
-            //   <div> timeSave </div>
-            // ) : (
-            <OneToOneEvent
-              userClient={userClient}
-              timeSubmitedCallback={timeSubmitedCallback}
-            />
-          )
-          // )
-          // )
-        }
+        {isOpen && (
+          <OneToOneEvent
+            userClient={userClient}
+            timeSubmitedCallback={timeSubmitedCallback}
+          />
+        )}
       </div>
     </div>
   );

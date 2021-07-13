@@ -11,11 +11,12 @@ import ProtectedRoute from "./ProtectedRoute";
 import EventPage from "./pages/eventPage/EventPage";
 import VolenteerPage from "./pages/volenteerPage/VolenteerPage";
 import ClientPage from "./pages/clientPage/ClientPage";
+import RegisterEventPage from "./pages/eventPage/components/RegisterEventPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg-gradient-to-b from-pink-200 to-purple-200 ">
+      <div className="min-h-screen bg-gradient-to-r from-pink-100 to-purple-200 ">
         <NavBar />
 
         <main className="mx-auto max-w-screen-2xl">
@@ -55,6 +56,12 @@ function App() {
               authed={true}
               component={VolenteerPage}
             />
+            <ProtectedRoute
+              exact
+              path="/eventDetails/:_id"
+              authed={true}
+              component={EventPage}
+            />
 
             <ProtectedRoute
               exact
@@ -65,7 +72,7 @@ function App() {
             <ProtectedRoute
               exact
               path="/register/event"
-              component={EventPage}
+              component={RegisterEventPage}
             />
 
             <ProtectedRoute exact path="/user" component={UserPage} />

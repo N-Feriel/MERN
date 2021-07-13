@@ -109,7 +109,7 @@ const deleteEvent = async (req, res) => {
       throw Error("The event with the given Id is not found!");
     }
     res.status(200).json({
-      status: 201,
+      status: 200,
       data: eventToRemove,
     });
   } catch (e) {
@@ -240,7 +240,7 @@ const getTotalEventType = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      data: eventData,
+      data: totalEvent,
     });
   } catch (e) {
     res.status(400).json({
@@ -269,6 +269,7 @@ const getTotalTimeOneToOne = async (req, res) => {
     if (!totalTime) {
       throw Error("can not calculate the total time");
     }
+
     res.status(200).json({
       status: 200,
       data: totalTime,

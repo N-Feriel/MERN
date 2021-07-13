@@ -134,7 +134,9 @@ const getUserClient = async (req, res) => {
 };
 
 const updateUserClient = async (req, res) => {
-  const filter = { _id: req.body._id };
+  const { _id, email } = req.body;
+
+  const filter = _id ? { _id: _id } : { email: email };
   const update = { ...req.body };
   delete update._id;
 

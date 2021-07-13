@@ -58,13 +58,12 @@ const authUser = async (req, res) => {
 
 const changeUserPassword = async (req, res) => {
   try {
-    const email = req.user.email;
-    console.log(req);
+    const _id = req.user._id;
 
-    let user = await VolenUser.findOne({ email: email });
+    let user = await VolenUser.findOne({ _id: _id });
 
     if (!user) {
-      throw Error("Invalid email.");
+      throw Error("Invalid request.");
     }
 
     const validPassword = await bcrypt.compare(

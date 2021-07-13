@@ -9,6 +9,7 @@ import {
   receiveClientData,
   receiveOneToData,
 } from "../../../store/reducers/Stat/actions";
+import ChartRep from "./ChartRep";
 
 function Stats({ setValueList }) {
   const dispatch = useDispatch();
@@ -142,8 +143,8 @@ function Stats({ setValueList }) {
   else if (status === "error") return <div>...Error</div>;
   else if (status === "idle")
     return (
-      <div className="grid gap-4 p-4 mx-auto space-y-5 bg-blue-100 lg:grid-flow-col lg:grid-cols-1 ">
-        <div className="p-4 space-y-2 text-center bg-blue-200">
+      <div className="grid mx-auto bg-blue-100 lg:grid-flow-row lg:grid-cols-2 ">
+        <div className="p-4 space-y-2 text-center bg-blue-200 lg:col-start-1 lg:row-span-1">
           {statVolenteers ? (
             <>
               <h2>Volenteers</h2>
@@ -161,7 +162,7 @@ function Stats({ setValueList }) {
           )}
         </div>
 
-        <div className="p-4 space-y-2 text-center bg-blue-200">
+        <div className="p-4 space-y-2 text-center bg-blue-200 lg:col-start-2 lg:row-span-1">
           {statClients ? (
             <>
               <h2>Clients</h2>
@@ -230,16 +231,7 @@ function Stats({ setValueList }) {
         ) : (
           <h2>No stats events in database</h2>
         )}
-
-        <div className="absolute flex justify-between bottom-2 left-4 right-4">
-          <div className="text-blue-900">Chart</div>
-          <div
-            className="text-indigo-500"
-            onClick={() => setValueList("event")}
-          >
-            More...
-          </div>
-        </div>
+        <ChartRep />
       </div>
     );
 }

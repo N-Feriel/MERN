@@ -296,16 +296,12 @@ function Settings({ setErrors, setMessageUpdate, setIsOpenModal1, errors }) {
               </div>
             )}
 
-            <div className="flex">
-              <h2>Total Time : </h2>
-              <p>{"totalTime" || 0} mn</p>
-            </div>
-            <h2>Total time </h2>
+            <h2 className="mb-1 text-gray-400">Total time</h2>
             {userEvents.length > 0 ? (
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap space-x-6">
                 {userEvents.map((eventType) => (
                   <div key={eventType._id}>
-                    {eventType._id} : <strong>{eventType.total}</strong>
+                    {eventType._id} : <strong>{eventType.total} </strong> (mn)
                   </div>
                 ))}
               </div>

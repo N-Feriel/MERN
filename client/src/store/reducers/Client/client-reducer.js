@@ -31,14 +31,14 @@ export default function userReducer(state = initialState, action) {
         clients: [...updated],
       };
     }
-    case "EMOVE_CLIENT": {
+    case "REMOVE_CLIENT": {
       return {
         ...state,
         clients: state.clients.filter((item) => item._id !== action.item._id),
       };
     }
 
-    case "ECEIVE_CLIENT_DATA_ERROR": {
+    case "RECEIVE_CLIENT_DATA_ERROR": {
       return {
         ...state,
         status: "error",

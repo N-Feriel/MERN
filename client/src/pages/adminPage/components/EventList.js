@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import ReactPaginate from "react-paginate";
@@ -8,6 +8,7 @@ import {
   receiveEventData,
   receiveEventError,
 } from "../../../store/reducers/Event/actions";
+import EventDetails from "./EventDetails";
 
 function EventList() {
   const { status, events } = useSelector((state) => state.event);
@@ -58,28 +59,18 @@ function EventList() {
       dispatch(receiveEventError(error));
     }
   };
+
+  useEffect(() => {
+    getFilteredEvent(currentType);
+  }, [currentType]);
+
   if (status === "error") return <div>Error...</div>;
   else if (status === "loading") return <div>...Loading</div>;
   else if (status === "idle") {
     const displayEvents = events
       .slice(pagesVisited, pagesVisited + eventsPerPage)
       .map((event, i) => {
-        return (
-          <div className="" key={i}>
-            <div>
-              <div>{event.name}</div>
-
-              <div>{event.type}</div>
-            </div>
-            <div>{moment(event.eventDate).format("MMM Do YY, h:mm a")}</div>
-
-            <div>
-              <button onClick={() => handleEventDetails(event._id)}>
-                Details
-              </button>
-            </div>
-          </div>
-        );
+        return <EventDetails key={i} event={event} />;
       });
     const pageCount = Math.ceil(events.length / eventsPerPage);
 
@@ -87,15 +78,15 @@ function EventList() {
       setPageNumber(selected);
     };
     return (
-      <div>
-        <div className="flex justify-center mb-5 space-x-10 align-middle">
+      <div className="w-full">
+        <div className="flex justify-center mb-5 space-x-5 align-middle lg:space-x-10">
           {stats.map((category) => (
             <div
               className={`py-2 px-4 rounded-lg
               ${
                 currentType === category._id
-                  ? "bg-blue-500 text-pink-200"
-                  : "bg-pink-200 text-blue-900 "
+                  ? "bg-yellow-500 text-purple-600"
+                  : "bg-yellow-200 text-purple-900 "
               }
               `}
               key={category._id}
@@ -106,7 +97,7 @@ function EventList() {
           ))}
         </div>
 
-        <div>
+        <div className="space-y-4">
           {displayEvents}
 
           {pageCount > 1 && (

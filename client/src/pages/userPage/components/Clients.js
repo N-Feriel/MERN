@@ -4,13 +4,33 @@ import {
   ViewListIcon,
   CollectionIcon,
 } from "@heroicons/react/outline";
+import { useSelector } from "react-redux";
 
 function Clients({ setUserList }) {
+  const { userClientsData } = useSelector((state) => state.user);
+
+  let numberOfActives = 0;
+  let numberOfArchives = 0;
+
+  if (userClientsData) {
+    const usersClientArchive = userClientsData.filter(
+      (user) => user.isActif === false
+    );
+    const usersClientActive = userClientsData.filter(
+      (user) => user.isActif === true
+    );
+    numberOfActives = usersClientActive.length;
+    numberOfArchives = usersClientArchive.length;
+  }
+
   return (
     <div className="grid gap-4 my-10 ">
       <div className="flex justify-between p-6">
         <h2 className="font-bold">List of CLients</h2>
-        <div className="flex space-x-1 text-pink-500">
+        <div
+          className="flex space-x-1 text-pink-500"
+          onClick={() => setUserList("allClients")}
+        >
           <p>See All</p>
           <div className="flex justify-center align-middle bg-pink-300 rounded-lg">
             <ChevronRightIcon className="h-6 p-1 text-white" />
@@ -27,7 +47,10 @@ function Clients({ setUserList }) {
               </div>
             </div>
             <div className="p-4 text-center">
-              <h2 className="font-bold text-pink-500 uppercase"> 20</h2>
+              <h2 className="font-bold text-pink-500 uppercase">
+                {" "}
+                {numberOfActives}
+              </h2>
               <p className="text-sm text-gray-600">Actives</p>
             </div>
           </div>
@@ -47,7 +70,9 @@ function Clients({ setUserList }) {
               </div>
             </div>
             <div className="p-4 text-center">
-              <h2 className="font-bold text-blue-500 uppercase"> 20</h2>
+              <h2 className="font-bold text-blue-500 uppercase">
+                {numberOfArchives}{" "}
+              </h2>
               <p className="text-sm text-gray-600">Archives</p>
             </div>
           </div>

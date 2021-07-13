@@ -1,17 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import Footer from "../components/footer/Footer";
-
-import { UserContext } from "../components/UserContext";
 
 import plants from "../assets/plants.png";
 
 function Home() {
   const history = useHistory();
 
-  const { user } = useContext(UserContext);
-
-  console.log(user, "userConext");
   return (
     <div className="relative flex items-center justify-center w-full h-screen">
       <div className="absolute top-0 bottom-0 left-0 right-0 z-0 bg-gradient-to-t from-gray-100 to-transparent">

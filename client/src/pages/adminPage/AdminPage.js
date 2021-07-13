@@ -124,26 +124,13 @@ function AdminPage() {
   }, []);
 
   return (
-    <div className="grid mx-auto lg:grid-cols-5 opacity-80 ">
+    <div className="grid mx-auto lg:grid-cols-5 opacity-80 lg:w-11/12 ">
       <SideBar setValueList={setValueList} valueList={valueList} />
-      <div className="mx-4 my-5 text-white bg-indigo-300 lg:mx-auto lg:w-full lg:h-full p-9 rounded-3xl lg:col-span-4">
+      <div className="mx-10 my-10 text-white bg-indigo-400 lg:ml-10 lg:mx-auto lg:w-full lg:min-h-screen p-9 rounded-3xl lg:col-span-4 bg-opacity-60">
         {project()}
       </div>
     </div>
   );
-
-  // return (
-  //   <div className="grid mx-auto mt-5 lg:grid-cols-4 lg:w-4/5 opacity-80">
-
-  //     <SideBar />
-  //     <div className="mx-4 my-5 text-white bg-indigo-300 lg:mx-auto lg:w-4/5 p-9 rounded-3xl lg:col-span-3">
-  //       <h2 className="mb-4 text-2xl font-bold text-center text-blue-700 lg:text-4xl">
-  //         Stats List
-  //       </h2>
-
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default AdminPage;

@@ -1,5 +1,5 @@
 import React from "react";
-import EventPage from "../../eventPage/EventPage";
+import Event from "../../eventPage/components/Event";
 
 function AddTime({ setUserList }) {
   const types = [
@@ -12,7 +12,7 @@ function AddTime({ setUserList }) {
 
   return (
     <div>
-      <EventPage types={types} setUserList={setUserList} />
+      <Event types={types} setUserList={setUserList} />
     </div>
   );
 }

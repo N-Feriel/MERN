@@ -32,7 +32,7 @@ function ClientPage() {
   );
   const [isOpenModalDelete, setIsOpenModalDelete] = useState(false);
 
-  const [totalTime, getTotalTime] = useState(0);
+  const [totalTime, setTotalTime] = useState(0);
   const history = useHistory();
 
   const { pathname } = useLocation();
@@ -65,7 +65,6 @@ function ClientPage() {
         throw responseBody.message;
       }
     } catch (error) {
-      console.log(error);
       setStatusClientData("error");
     }
   };
@@ -86,8 +85,8 @@ function ClientPage() {
       const responseBody = await response.json();
 
       if (response.status === 200) {
-        if (responseBody.total[0]) {
-          getTotalTime(responseBody.total[0].total);
+        if (responseBody.data[0]) {
+          setTotalTime(responseBody.data[0].total);
         }
       } else {
         throw responseBody.message;
@@ -180,10 +179,12 @@ function ClientPage() {
   else if (statusClientData === "error") return <div>...Error</div>;
   else if (statusClientData === "idle" && clientData) {
     const hasAccess = clientData.assignTo.assignGM === user._id;
-    console.log(hasAccess, clientData);
+    const isAdmin = user.isAdmin;
 
     return (
       <main className="flex flex-col px-4">
+        {/* {errors && <div>{errors}</div>} */}
+
         <ModalComp modalIsOpen={isOpenModalDelete}>
           <h4 className="mb-4 text-center lg:text-xl">{messageNotification}</h4>
           <div className="flex mx-auto mt-5">
@@ -228,12 +229,15 @@ function ClientPage() {
 
         <div className="flex justify-between px-10 my-4 lg:span-row-1 row-span-full">
           <h1 className="text-xl lg:text-3xl">Edit Client</h1>
-          <button
-            className="px-4 py-1 text-white uppercase bg-green-600 rounded-md"
-            onClick={() => history.push("/register/client")}
-          >
-            Create
-          </button>
+
+          {isAdmin && (
+            <button
+              className="px-4 py-1 text-white uppercase bg-green-600 rounded-md"
+              onClick={() => history.push("/register/client")}
+            >
+              Create
+            </button>
+          )}
         </div>
 
         <div className="grid gap-6 px-5 lg:grid-flow-col lg:grid-cols-4">
@@ -280,7 +284,9 @@ function ClientPage() {
             </div>
             <div className="flex">
               <h2>Total Time : </h2>
-              <p>{totalTime || 0} mn</p>
+              <p>
+                <strong>{totalTime}</strong> (mn)
+              </p>
             </div>
 
             <div className="flex justify-around mt-6">
@@ -296,37 +302,45 @@ function ClientPage() {
               >
                 Delete
               </button>
+
+              {hasAccess && (
+                <button
+                  className={`p-2 text-white  rounded-lg  w-auto  ${
+                    clientData.isActif
+                      ? "bg-pink-400 hover:bg-pink-600 cursor-pointer"
+                      : "bg-gray-400 "
+                  }`}
+                  disabled={clientData.isActif === false}
+                  onClick={handleAddTime}
+                >
+                  add Time
+                </button>
+              )}
             </div>
           </div>
 
-          <div className="p-4 bg-white shadow-inner rounded-2xl lg:col-span-3">
-            <h2 className="ml-6 text-lg font-bold lg:text-2xl lg:font-semibold">
-              Edit
-            </h2>
-            <UpdatePage
-              initialState={clientData}
-              setClientData={setClientData}
-              isClient
-            />
+          <div className="flex flex-col space-y-4 lg:col-span-3">
+            {addTime && (
+              <div className="p-4 bg-white shadow-inner rounded-2xl lg:col-span-3">
+                <OneToOneEvent
+                  userClient={clientData}
+                  timeSubmitedCallback={timeSubmitedCallback}
+                />
+              </div>
+            )}
+
+            <div className="p-4 bg-white shadow-inner rounded-2xl lg:col-span-3">
+              <h2 className="ml-6 text-lg font-bold lg:text-2xl lg:font-semibold">
+                Edit
+              </h2>
+              <UpdatePage
+                initialState={clientData}
+                setClientData={setClientData}
+                isClient
+              />
+            </div>
           </div>
         </div>
-
-        {hasAccess && (
-          <button
-            className={clientData.isActif ? "" : "disabled"}
-            disabled={clientData.isActif === false}
-            onClick={handleAddTime}
-          >
-            add Time
-          </button>
-        )}
-
-        {addTime && (
-          <OneToOneEvent
-            userGD={clientData}
-            timeSubmitedCallback={timeSubmitedCallback}
-          />
-        )}
       </main>
     );
   }

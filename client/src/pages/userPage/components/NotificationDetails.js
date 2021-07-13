@@ -19,8 +19,10 @@ function NotificationDetails({ notification, deleteNotifcation }) {
           },
         };
 
+    console.log(values);
+
     try {
-      const response = await fetch(`/api/users/clients/user`, {
+      const response = await fetch("/api/users/clients/user", {
         method: "PATCH",
         body: JSON.stringify(values),
         headers: {
