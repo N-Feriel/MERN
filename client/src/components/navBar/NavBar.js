@@ -34,7 +34,6 @@ function NavBar() {
           Home
         </NavItem>
         <NavItem href="/register/event">Add Time</NavItem>
-        <NavItem href="/archives">Archives</NavItem>
 
         {user ? (
           <button

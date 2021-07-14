@@ -38,7 +38,7 @@ function EventPage() {
 
       if (response.status === 200) {
         setEventsData(response.data);
-        setStatusEvent("error");
+        setStatusEvent("idle");
       } else {
         throw response.message;
       }
