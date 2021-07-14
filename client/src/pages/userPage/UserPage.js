@@ -40,11 +40,10 @@ function UserPage() {
   const history = useHistory();
   const [errors, setErrors] = useState("");
 
-  const { status, userClientsData } = useSelector((state) => state.user);
+  const { status } = useSelector((state) => state.user);
 
   const [userList, setUserList] = useState("client");
 
-  const [userEvents, setUserEvents] = useState([]);
   const [userNotifications, setUserNotifications] = useState([]);
   const [totalNew, setTotalNew] = useState(0);
 
@@ -238,10 +237,6 @@ function UserPage() {
               />
             </div>
           </div>
-        </div>
-
-        <div className="p-4">
-          <input type="text" />
         </div>
 
         <Banner />
