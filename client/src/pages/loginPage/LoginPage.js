@@ -38,8 +38,8 @@ function LoginPage() {
   if (getCurrentUser()) return <Redirect to="/" />;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full mx-auto mt-32 bg-gray-200 lg:w-3/4 ">
-      {error && <div className="text-red-500">{error}</div>}
+    <div className="flex flex-col items-center justify-center mx-auto mt-32 bg-purple-300 h-96 lg:w-3/4 rounded-3xl">
+      {error && <div className="text-red-200">{error}</div>}
 
       <Formik
         initialValues={initialValues}
@@ -48,7 +48,7 @@ function LoginPage() {
       >
         {(formik) => {
           return (
-            <Form>
+            <Form className="flex flex-col w-4/5 ">
               <FormikControl
                 control="input"
                 type="email"
@@ -63,7 +63,7 @@ function LoginPage() {
                 name="password"
               />
               <button
-                className="flex items-center justify-center px-4 py-2 my-4 bg-purple-400 rounded-md hover:bg-purple-200 hover:text-purple-800"
+                className="px-4 py-2 mx-auto my-6 mr-0 bg-purple-100 rounded-md hover:bg-purple-600 hover:text-purple-100"
                 type="submit"
                 disabled={!formik.isValid}
               >

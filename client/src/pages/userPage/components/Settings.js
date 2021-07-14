@@ -23,6 +23,8 @@ import {
 } from "@heroicons/react/outline";
 import { logout } from "../../../services/authService";
 import { useHistory } from "react-router-dom";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 
 function Settings({ setErrors, setMessageUpdate, setIsOpenModal1, errors }) {
   const { user } = useContext(UserContext);
@@ -143,8 +145,8 @@ function Settings({ setErrors, setMessageUpdate, setIsOpenModal1, errors }) {
     getUsertime();
   }, []);
 
-  if (userStatus === "loading") return <div>...Loading</div>;
-  else if (userStatus === "error") return <div>...Error</div>;
+  if (userStatus === "loading") return <Loading />;
+  else if (userStatus === "error") return <Error />;
   else if (userStatus === "idle")
     return (
       <div>

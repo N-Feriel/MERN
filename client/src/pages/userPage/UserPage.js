@@ -29,6 +29,8 @@ import ModalComp from "../../components/ModelCom";
 import Banner from "../../components/Banner";
 import Notification from "./components/Notification";
 import ClientsList from "./components/ClientsList";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 function UserPage() {
   const url = `/api/users/clientList`;
@@ -197,8 +199,8 @@ function UserPage() {
     displayNotifications();
   }, []);
 
-  if (status === "error") return <div>Error...</div>;
-  else if (status === "loading") return <div>...Loading</div>;
+  if (status === "error") return <Error />;
+  else if (status === "loading") return <Loading />;
   else if (status === "idle") {
     return (
       <main className="p-6 ">

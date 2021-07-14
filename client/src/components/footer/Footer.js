@@ -7,7 +7,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center px-10 pt-4 font-serif text-sm text-gray-300 bg-blue-900 md:flex-row justify-self-end">
+    <div className="absolute left-0 right-0 z-10 flex flex-col items-center px-10 pt-4 font-serif text-sm text-gray-300 bg-blue-900 -bottom-24 ">
       <h2 className="font-mono font-bold text-white">Contact</h2>
 
       <div className="grid grid-flow-row-dense mx-auto md:grid-cols-2 lg:grid-cols-3 justify-items-center">

@@ -23,7 +23,7 @@ function CheckboxGroup(props) {
             return (
               <React.Fragment key={option.key}>
                 <input
-                  className="w-8 h-8 text-purple-600"
+                  className="w-4 h-4 text-purple-600"
                   type="checkbox"
                   id={option.value}
                   {...field}
@@ -32,7 +32,7 @@ function CheckboxGroup(props) {
                   checked={field.value.includes(option.value)}
                 />
                 <label
-                  className="text-xs font-semibold text-gray-600 uppercase md:text-sm text-light"
+                  className="ml-1 mr-3 text-xs font-semibold text-gray-600 uppercase md:text-sm text-light"
                   htmlFor={option.value}
                 >
                   {option.key}

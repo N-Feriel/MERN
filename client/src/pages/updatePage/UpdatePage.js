@@ -109,8 +109,7 @@ function UpdatePage({ isClient, initialState, setClientData }) {
 
         alert("The user is updated");
       } else {
-        console.log(responseBody, "res");
-        // throw responseBody.message;
+        throw responseBody.message;
       }
     } catch (error) {
       setErrors(error);
@@ -153,15 +152,7 @@ function UpdatePage({ isClient, initialState, setClientData }) {
 
               {isClient ? (
                 <>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      alignItems: "flex-end",
-                      justifyContent: "space-between",
-                      margin: "0 1rem 1rem 0",
-                    }}
-                  >
+                  <div className="grid items-center mx-1 md:grid-flow-col md:grid-cols-2">
                     <FormikControl
                       control="input"
                       type="checkbox"
@@ -176,15 +167,14 @@ function UpdatePage({ isClient, initialState, setClientData }) {
                       label="Name parent"
                       name="infoParent.name"
                     />
-                  </div>
-
-                  <div>
                     <FormikControl
                       control="date"
                       label="Due Date/ Date of Birth"
                       name="dueDate"
                     />
+                  </div>
 
+                  <div>
                     <FormikControl
                       control="select"
                       label="Source"

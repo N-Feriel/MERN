@@ -10,6 +10,8 @@ import {
   CalendarIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 function VolenteerPage() {
   const { _id } = useParams();
@@ -168,8 +170,8 @@ function VolenteerPage() {
     getClientAssigned();
   }, []);
 
-  if (statusVolenteer === "loading") return <div>...Loading</div>;
-  else if (statusVolenteer === "error") return <div>...Error</div>;
+  if (statusVolenteer === "loading") return <Loading />;
+  else if (statusVolenteer === "error") return <Error />;
   else if (statusVolenteer === "idle")
     return (
       <main className="flex flex-col px-4 ">

@@ -9,6 +9,8 @@ import {
   receiveEventError,
 } from "../../../store/reducers/Event/actions";
 import EventDetails from "./EventDetails";
+import Error from "../../../components/Error";
+import Loading from "../../../components/Loading";
 
 function EventList() {
   const { status, events } = useSelector((state) => state.event);
@@ -64,8 +66,8 @@ function EventList() {
     getFilteredEvent(currentType);
   }, [currentType]);
 
-  if (status === "error") return <div>Error...</div>;
-  else if (status === "loading") return <div>...Loading</div>;
+  if (status === "error") return <Error />;
+  else if (status === "loading") return <Loading />;
   else if (status === "idle") {
     const displayEvents = events
       .slice(pagesVisited, pagesVisited + eventsPerPage)

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Error from "../../../components/Error";
+import Loading from "../../../components/Loading";
 
 import {
   requestStatData,
@@ -139,8 +141,8 @@ function Stats({ setValueList }) {
     getOneToOneStats();
   }, []);
 
-  if (status === "loading") return <div>...Loading</div>;
-  else if (status === "error") return <div>...Error</div>;
+  if (status === "loading") return <Loading />;
+  else if (status === "error") return <Error />;
   else if (status === "idle")
     return (
       <div className="grid mx-auto bg-blue-100 lg:grid-flow-row lg:grid-cols-2 ">

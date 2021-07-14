@@ -9,6 +9,8 @@ import {
   receiveClientData,
   receiveClientDataError,
 } from "../../../store/reducers/Client/actions";
+import Error from "../../../components/Error";
+import Loading from "../../../components/Loading";
 
 function ClientList() {
   const { status, clients } = useSelector((state) => state.client);
@@ -56,8 +58,8 @@ function ClientList() {
   const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
 
-  if (status === "error") return <div>Error...</div>;
-  else if (status === "loading") return <div>...Loading</div>;
+  if (status === "error") return <Error />;
+  else if (status === "loading") return <Loading />;
   else if (status === "idle") {
     const displayClients = clients
       .slice(pagesVisited, pagesVisited + usersPerPage)

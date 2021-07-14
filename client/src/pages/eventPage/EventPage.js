@@ -1,8 +1,10 @@
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
+import Error from "../../components/Error";
 
 import FormikControl from "../../components/formik/FormikControl";
+import Loading from "../../components/Loading";
 import ModalComp from "../../components/ModelCom";
 
 function EventPage() {
@@ -36,12 +38,11 @@ function EventPage() {
 
       if (response.status === 200) {
         setEventsData(response.data);
-        setStatusEvent("idle");
+        setStatusEvent("error");
       } else {
         throw response.message;
       }
     } catch (error) {
-      console.log(error);
       setErrors(error);
       setStatusEvent("error");
     }
@@ -112,9 +113,9 @@ function EventPage() {
   }, []);
 
   if (statusEvent === "loading") {
-    return <div>...Loading</div>;
+    return <Loading />;
   } else if (statusEvent === "error") {
-    return <div>{errors}</div>;
+    return <Error />;
   } else if (statusEvent === "idle") {
     return (
       <main className="grid px-6 py-4 bg-yellow-200 gap-y-5 lg:grid-flow-row lg:grid-cols-3 rounded-xl">

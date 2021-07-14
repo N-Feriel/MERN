@@ -28,3 +28,19 @@
   color: rgba(5, 19, 83, 0.87);
   background-color: rgba(19, 27, 99, 0.6);
 }
+
+.icon {
+  animation: App-img-spin 2s infinite;
+}
+
+@keyframes App-img-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

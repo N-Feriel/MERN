@@ -12,6 +12,8 @@ import {
   CalendarIcon,
   UserIcon,
 } from "@heroicons/react/outline";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 function ClientPage() {
   const { _id } = useParams();
@@ -175,8 +177,8 @@ function ClientPage() {
     getUsertime(_id);
   }, [addTime]);
 
-  if (statusClientData === "loading") return <div>...Loading</div>;
-  else if (statusClientData === "error") return <div>...Error</div>;
+  if (statusClientData === "loading") return <Loading />;
+  else if (statusClientData === "error") return <Error />;
   else if (statusClientData === "idle" && clientData) {
     const hasAccess = clientData.assignTo.assignGM === user._id;
     const isAdmin = user.isAdmin;
